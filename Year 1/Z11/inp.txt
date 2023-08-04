@@ -1,0 +1,13 @@
+abcdefg
+
+#ifdef name1
+name1
+#ifdef name1
+#else
+noname
+#endif
+#else
+name1 is no true
+#endif
+
+

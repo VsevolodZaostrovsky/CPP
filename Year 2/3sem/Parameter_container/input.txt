@@ -1,0 +1,5 @@
+fromfile =ai 2 34 54
+ff =d 3.45
+fdstr =s asdfdsar
+array_double =ad 3 4.5 65.4 1.2314
+ff =d 3.453
