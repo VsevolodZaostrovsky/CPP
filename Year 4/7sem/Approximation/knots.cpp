@@ -6,13 +6,15 @@
 #define Incorrectab -2
 # define M_PI           3.14159265358979323846
 
-int GenerateEquidistantKnots(double a, double b, int N, double * result)
+int GenerateEquidistantGrid(double a, double b, int N, double (*f)(double), double * knots, double * meanings)
 {
     if(N <= 1) return NotEnoughKnotes;
     if(N == 2)
     {
-        result[0] = a;
-        result[1] = b;
+        knots[0] = a; 
+        knots[1] = b;
+        meanings[0] = f(a);
+        meanings[1] = f(b);
         return GoodJob;
     } 
     if(a > b) return Incorrectab;
@@ -21,13 +23,14 @@ int GenerateEquidistantKnots(double a, double b, int N, double * result)
     double now = a;
     for(int i = 0; i < N; ++i) 
     {
-        result[i] = now;
+        knots[i] = now;
+        meanings[i] = f(now);
         now += delta;
     }
     return GoodJob;
 } 
 
-int GenerateChebyshevKnots(double a, double b, int N, double * result)
+int GenerateChebyshevGrid(double a, double b, int N, double (*f)(double), double * knots, double * meanings)
 {
     if(N <= 1) return NotEnoughKnotes;
     if(a > b) return Incorrectab;
@@ -37,7 +40,8 @@ int GenerateChebyshevKnots(double a, double b, int N, double * result)
 
     for(int i = 0; i < N; ++i) 
     {
-        result[N - 1 - i] = delta1 + delta2 * cos((2 * i + 1) * M_PI / (2 * N));
+        knots[N - 1 - i] = delta1 + delta2 * cos((2 * i + 1) * M_PI / (2 * N));
+        meanings[N - 1 - i] = f(knots[N - 1 - i]);
     }
 
     return GoodJob;
