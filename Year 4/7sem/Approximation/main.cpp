@@ -18,7 +18,7 @@ int main(){
 
     Ln L(3, knot, meanings);
     L.print();
-    Pn P(3, coefs);
+    Pn P(3, knot, meanings);
     P.print();
     for(double k = -5; k < 5; k += 0.2)
     {

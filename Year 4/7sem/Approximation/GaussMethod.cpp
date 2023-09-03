@@ -1,4 +1,5 @@
-#include "Matrix.hpp"
+#pragma once
+#define e(i, j, n) ((i-1)*(n) + (j-1))
 
 int solve(int n, double *M, double *b, double *x, int *memory)
 {
