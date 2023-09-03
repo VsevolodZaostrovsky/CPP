@@ -1,6 +1,8 @@
 #include "Pn.hpp"
 #include "Ln.hpp"
 
+#include "knots.cpp"
+
 double module(double x)
 {
     return -x * (x < 0) + x * (x > 0);
@@ -32,8 +34,29 @@ int main(){
     }
     std::cout << "P4: " << P.calculate(10) << '\n';
     std::cout << "L4: " << L.calculate(10) << '\n';
+
+    double * knots1 = new double[30];
+    double * knots2 = new double[30];
+
+    int N1 = 27;
+    int N2 = 20;
+
+    GenerateEquidistantKnots(0, 2, N1, knots1);
+    GenerateChebyshevKnots(0, 2, N2, knots2);
+
+ 
+    for(int k = 0; k < N1; ++k){
+        std::cout << knots1[k] << ' '; 
+    }
+    std::cout << '\n';
+    for(int k = 0; k < N2; ++k){
+        std::cout << knots2[k] << ' ';
+    }
+    std::cout << '\n';
     
     delete [] coefs;
     delete [] meanings;
     delete [] knot;
+    delete [] knots2;
+    delete [] knots1;
 }
