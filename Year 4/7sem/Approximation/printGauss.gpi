@@ -1,0 +1,9 @@
+#! /usr/bin/gnuplot -persist
+set style line 1 lt 1 linecolor rgb "red" lw 1 pt 1
+set style line 2 lt 1 linecolor rgb "blue" lw 1 pt 1
+
+set yrange [0:4]
+set grid
+
+plot  "t1.txt" using 1:2 ls 1 title "Interpolation Gauss Polynom" with lines ,\
+  sin(x) ls 2 title "Original function"
