@@ -76,7 +76,11 @@ Pn::Pn(int N, double * knots, double * meanings) : _N(N)
 	if(solve(_N, M, meanings, _coefs, memory) != 0) 
 	{
 //		throw "Pn::Pn(int N, double * knots, double * meanings) - something bed happend while solving system";
-		std::cout << "something bed happend while solving system";
+		std::cout << "something bed happend while solving system\n";
+		for(int i = 0; i < _N; ++i)
+		{
+			_coefs[i] = 0;
+		}
 	}
 
 	delete [] M;

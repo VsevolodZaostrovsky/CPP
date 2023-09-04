@@ -15,18 +15,33 @@ double f(double x)
 
 void PrintTable(double *knots, int N, Pn *P, Ln *L, double (*f)(double))
 {
-    printf("Knotes                     Pn                      Ln                     f\n");
+    printf("   Knotes               Pn                   Ln                   f\n");
     for (int i = 0; i < N - 1; ++i)
     {
         double xi = knots[i];
-        printf("%10.15lf %10.15lf %10.15lf %10.15lf \n", xi, P->calculate(xi), L->calculate(xi), f(xi));
+        printf("%20.15lf %20.15lf %20.15lf %20.15lf \n", xi, P->calculate(xi), L->calculate(xi), f(xi));
         double xi1 = 2 * xi / 3 + knots[i + 1] / 3;
-        printf("%10.15lf %10.15lf %10.15lf %10.15lf \n", xi1, P->calculate(xi1), L->calculate(xi1), f(xi1));
+        printf("%20.15lf %20.15lf %20.15lf %20.15lf \n", xi1, P->calculate(xi1), L->calculate(xi1), f(xi1));
         double xi2 = xi / 3 + 2 * knots[i + 1] / 3;
-        printf("%10.15lf %10.15lf %10.15lf %10.15lf \n", xi2, P->calculate(xi2), L->calculate(xi2), f(xi2));
+        printf("%20.15lf %20.15lf %20.15lf %20.15lf \n", xi2, P->calculate(xi2), L->calculate(xi2), f(xi2));
     }
     double xi = knots[N - 1];
-    printf("%10.15lf %10.15lf %10.15lf %10.15lf \n", xi, P->calculate(xi), L->calculate(xi), f(xi));
+    printf("%20.15lf %20.15lf %20.15lf %20.15lf \n", xi, P->calculate(xi), L->calculate(xi), f(xi));
+}
+
+void WriteResult(double *knots, int N, Pn *P, Ln *L, double (*f)(double), FILE *out)
+{
+    for (int i = 0; i < N - 1; ++i)
+    {
+        double xi = knots[i];
+        fprintf(out, "%20.15lf %20.15lf %20.15lf %20.15lf \n", xi, P->calculate(xi), L->calculate(xi), f(xi));
+        double xi1 = 2 * xi / 3 + knots[i + 1] / 3;
+        fprintf(out, "%20.15lf %20.15lf %20.15lf %20.15lf \n", xi1, P->calculate(xi1), L->calculate(xi1), f(xi1));
+        double xi2 = xi / 3 + 2 * knots[i + 1] / 3;
+        fprintf(out, "%20.15lf %20.15lf %20.15lf %20.15lf \n", xi2, P->calculate(xi2), L->calculate(xi2), f(xi2));
+    }
+    double xi = knots[N - 1];
+    fprintf(out, "%20.15lf %20.15lf %20.15lf %20.15lf \n", xi, P->calculate(xi), L->calculate(xi), f(xi));
 }
 
 int main(int argc, char *argv[])
@@ -43,7 +58,8 @@ int main(int argc, char *argv[])
     int k = atoi(argv[2]);    // тип узлов
     double a = atof(argv[3]); // левая
     double b = atof(argv[4]); // и правая границы отрезка
-    std::string m = argv[5];  // имя файла, в который нужно записать ответ
+    FILE *fp;
+    int flag = 0;
 
     if (N <= 1)
     {
@@ -77,8 +93,26 @@ int main(int argc, char *argv[])
 
         Pn P(N, knots1, mean1);
         std::cout << "Polynom built\n";
-
-        PrintTable(knots1, N, &P, &L, f);
+        P.print();
+        
+        if(argv[5][0] == 'n' && argv[5][1] == 'o' && argv[5][2] == 't') 
+        {
+            flag = 1;
+            std::cout << "not in file\n";
+        }
+        
+        if (flag == 0 && (fp = fopen(argv[5], "w+")) == NULL) // имя файла, в который нужно записать ответ
+        {
+            printf("Не удалось открыть файл");
+            return 0;
+        }
+        
+        if(flag) PrintTable(knots1, N, &P, &L, f);
+        else 
+        {
+            WriteResult(knots1, N, &P, &L, f, fp);
+            fclose(fp);
+        }
     }
     catch (const char *error_message)
     {

@@ -1,3 +1,3 @@
 Чтобы запустить скрипт gnuplot
-chmod +x testsin.gpi
-./testsin.gpi
+chmod +x graph.gpi
+./graph.gpi
