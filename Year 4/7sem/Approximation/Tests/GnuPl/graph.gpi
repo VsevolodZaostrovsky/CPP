@@ -1,9 +1,8 @@
 #! /usr/bin/gnuplot -persist
+
 set style line 1 lt 1 linecolor rgb "red" lw 1 pt 1
 set style line 2 lt 1 linecolor rgb "green" lw 1 pt 1
 set style line 3 lt 1 linecolor rgb "blue" lw 1 pt 1
-set output 't1.png'
-
 
 set yrange [0:4]
 set grid

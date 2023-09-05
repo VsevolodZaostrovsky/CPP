@@ -10,7 +10,7 @@ double module(double x)
 
 double f(double x)
 {
-    return sin(x);
+    return log(x); 
 }
 
 void PrintTable(double *knots, int N, Pn *P, Ln *L, double (*f)(double))
@@ -83,16 +83,24 @@ int main(int argc, char *argv[])
 
     try
     {
-        GenerateEquidistantGrid(a, b, N, f, knots1, mean1);
-        GenerateEquidistantGrid(a, b, N, f, knots2, mean2);
-
-        std::cout << "Grids generated\n";
+        if(k)
+        {
+            std::cout << "Chebyshev Grid generated\n";
+            GenerateChebyshevGrid(a, b, N, f, knots1, mean1);
+            GenerateChebyshevGrid(a, b, N, f, knots2, mean2);
+        }
+        else 
+        {
+            std::cout << "Equidistant Grid generated\n";
+            GenerateEquidistantGrid(a, b, N, f, knots1, mean1);
+            GenerateEquidistantGrid(a, b, N, f, knots2, mean2);
+        }
 
         Ln L(N, knots2, mean2);
         std::cout << "Lagr Polynom built\n";
 
         Pn P(N, knots1, mean1);
-        std::cout << "Polynom built\n";
+        std::cout << "Polynom built: \n";
         P.print();
         
         if(argv[5][0] == 'n' && argv[5][1] == 'o' && argv[5][2] == 't') 

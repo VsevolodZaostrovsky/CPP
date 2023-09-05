@@ -1,0 +1,14 @@
+#! /usr/bin/gnuplot -persist
+set terminal png size 1000,1000 enhanced font "Helvetica,20"
+set output "modulG3.png"
+
+set style line 1 lt 1 linecolor rgb "red" lw 1 pt 1
+set style line 2 lt 1 linecolor rgb "blue" lw 1 pt 1
+
+set yrange [0:5]
+set xrange [-5:5]
+
+set grid
+
+plot  "modul3.txt" using 1:2 ls 1 title "Interpolation Gauss Polynom" with lines ,\
+  abs(x) ls 2 title "Original function"
