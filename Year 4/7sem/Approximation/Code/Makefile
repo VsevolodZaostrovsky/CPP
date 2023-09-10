@@ -22,7 +22,5 @@ clean:
 	rm -rf *.o vector
 
 gr:
-	chmod +x printGauss.gpi
-	chmod +x printLagr.gpi
-	./printGauss.gpi
-	./printLagr.gpi
+	chmod +x printAll.gpi
+	./printAll.gpi

@@ -10,7 +10,7 @@ double module(double x)
 
 double f(double x)
 {
-    return log(x); 
+    return log(x);
 }
 
 void PrintTable(double *knots, int N, Pn *P, Ln *L, double (*f)(double))
@@ -44,13 +44,42 @@ void WriteResult(double *knots, int N, Pn *P, Ln *L, double (*f)(double), FILE *
     fprintf(out, "%20.15lf %20.15lf %20.15lf %20.15lf \n", xi, P->calculate(xi), L->calculate(xi), f(xi));
 }
 
+void WriteSkrypt(int N, int k, double a, double b, char *testfilename, FILE *out)
+{
+    std::string kn;
+
+    if (k)
+        kn = "Chebyshev";
+    else
+        kn = "Equidistant";
+
+    fprintf(out, "#! /usr/bin/gnuplot -persist\n");
+    fprintf(out, "set terminal png size 1000,1000 enhanced font \"Helvetica Bold, 20\"\n");
+    fprintf(out, "set output \"%s.png\"\n\n", testfilename);
+
+    fprintf(out, "set style line 1 lt 1 linecolor rgb \"red\" lw 1 pt 1\n");
+    fprintf(out, "set style line 2 lt 1 linecolor rgb \"blue\" lw 1 pt 1\n");
+    fprintf(out, "set style line 3 lt 1 linecolor rgb \"green\" lw 1 pt 1\n\n");
+
+    //    fprintf(out, "set yrange [0:5]");
+    fprintf(out, "set xrange [%lf:%lf]\n", a, b);
+
+    fprintf(out, "set title \"%s - %d %s knots \"\n", testfilename, N, kn.c_str());
+
+    fprintf(out, "set grid\n\n");
+
+    fprintf(out, "plot  \"%s\" using 1:2 ls 1 title \"Interpolation Gauss Polynom\" with lines, ", testfilename);
+    fprintf(out, "\"%s\" using 1:4 ls 2 title \"Original function\", ", testfilename);
+    fprintf(out, "\"%s\" using 1:3 ls 3 title \"Lagrange function\" with lines", testfilename);
+}
+
 int main(int argc, char *argv[])
 {
     if (argc < 6)
     {
         std::cout << "Wrong number of parameters, must be 5 in format:\n"
                   << "N k a b name \n"
-                  << "where: \n N - number of knots \n k - type of knots (0 or 1) \n [a, b] - interval of approx \n name - name of the file with answer \n";
+                  << "where: \n N - number of knots \n k - type of knots (0 - Equidistant or 1 - Chebyshev) \n [a, b] - interval of approx \n name - name of the file with answer \n";
         return -1;
     }
 
@@ -59,6 +88,7 @@ int main(int argc, char *argv[])
     double a = atof(argv[3]); // левая
     double b = atof(argv[4]); // и правая границы отрезка
     FILE *fp;
+    FILE *sk;
     int flag = 0;
 
     if (N <= 1)
@@ -83,13 +113,13 @@ int main(int argc, char *argv[])
 
     try
     {
-        if(k)
+        if (k)
         {
             std::cout << "Chebyshev Grid generated\n";
             GenerateChebyshevGrid(a, b, N, f, knots1, mean1);
             GenerateChebyshevGrid(a, b, N, f, knots2, mean2);
         }
-        else 
+        else
         {
             std::cout << "Equidistant Grid generated\n";
             GenerateEquidistantGrid(a, b, N, f, knots1, mean1);
@@ -102,24 +132,33 @@ int main(int argc, char *argv[])
         Pn P(N, knots1, mean1);
         std::cout << "Polynom built: \n";
         P.print();
-        
-        if(argv[5][0] == 'n' && argv[5][1] == 'o' && argv[5][2] == 't') 
+
+        if (argv[5][0] == 'n' && argv[5][1] == 'o' && argv[5][2] == 't')
         {
             flag = 1;
             std::cout << "not in file\n";
         }
-        
+
         if (flag == 0 && (fp = fopen(argv[5], "w+")) == NULL) // имя файла, в который нужно записать ответ
         {
             printf("Не удалось открыть файл");
             return 0;
         }
-        
-        if(flag) PrintTable(knots1, N, &P, &L, f);
-        else 
+
+        if (flag)
+            PrintTable(knots1, N, &P, &L, f);
+        else
         {
             WriteResult(knots1, N, &P, &L, f, fp);
+            if ((sk = fopen("printAll.gpi", "w+")) == NULL) 
+            {
+                printf("Не удалось открыть файл");
+                fclose(fp);
+                return 0;
+            }
+            WriteSkrypt(N, k, a, b, argv[5], sk);
             fclose(fp);
+            fclose(sk);
         }
     }
     catch (const char *error_message)
