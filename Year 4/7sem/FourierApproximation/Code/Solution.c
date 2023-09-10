@@ -26,23 +26,10 @@ int GenerateNet(double *net, int N)
     return NET_GENERATED_WELL;
 }
 
-// перемножает попарно и считает сумму произведений элементов массивов v1 и v2 с индекса start до индекса finish, не включая последний
-double SCProduct(int start, int finish, double * v1, double * v2) 
-{
-    double ans = 0;
-
-    for(int m = start; m < finish; ++m)
-    {
-        ans += v1[m] * v2[m];
-    }
-
-    return ans;
-}
-
 // функции, вычисляющие и записывающие базисный вектор 
 double Phi(int m, int k, int N) 
 {
-    double h = 1 / (N + 0.5);
+    double h = 1 / (N - 0.5);
     return sin( M_PI * m * ( - h / 2 + k * h) );
 }
 
@@ -56,6 +43,8 @@ void WritePhiTo(int m, int N, double * ph)
 
 int WriteCNkTo(int N, double * cNks, double (*u)(double), double * netmemory, double * umemory, double * phimemory)
 {
+    double h = 1 / (N - 0.5);
+
     if(GenerateNet(netmemory, N) == NET_GENERATION_ERROR) 
     {
         return NET_GENERATION_ERROR;
@@ -69,7 +58,10 @@ int WriteCNkTo(int N, double * cNks, double (*u)(double), double * netmemory, do
     for(int k = 1; k < N; ++k) 
     {
         WritePhiTo(k, N, phimemory);
-        cNks[k] = 2 * SCProduct(1, N, phimemory, umemory);
+        double ans = 0;
+        for(int j = 1; j < N; ++j) ans += phimemory[j] * umemory[j] * h;
+
+        cNks[k] = 2 * ans;
     }
 
     return 0;

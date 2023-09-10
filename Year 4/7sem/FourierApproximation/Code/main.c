@@ -5,7 +5,7 @@
 
 double u(double x)
 {
-    return x * (1 - x);
+    return x * (1 - x) * cos(x * x);
 }
 
 void PrintTable(double *knots, int N, double *coefs, double (*u)(double))
@@ -16,9 +16,9 @@ void PrintTable(double *knots, int N, double *coefs, double (*u)(double))
         double xi = knots[i];
         printf("%20.15lf %20.15lf %20.15lf \n", xi, FourierCompute(coefs, N, xi), u(xi));
         double xi1 = 2 * xi / 3 + knots[i + 1] / 3;
-        printf("%20.15lf %20.15lf %20.15lf \n", xi1, FourierCompute(coefs, N, xi), u(xi1));
+        printf("%20.15lf %20.15lf %20.15lf \n", xi1, FourierCompute(coefs, N, xi1), u(xi1));
         double xi2 = xi / 3 + 2 * knots[i + 1] / 3;
-        printf("%20.15lf %20.15lf %20.15lf \n", xi2, FourierCompute(coefs, N, xi), u(xi2));
+        printf("%20.15lf %20.15lf %20.15lf \n", xi2, FourierCompute(coefs, N, xi2), u(xi2));
     }
     double xi = knots[N - 1];
     printf("%20.15lf %20.15lf %20.15lf \n", xi, FourierCompute(coefs, N, xi), u(xi));
@@ -31,9 +31,9 @@ void WriteResult(double *knots, int N, double *coefs, double (*f)(double), FILE 
         double xi = knots[i];
         fprintf(out, "%20.15lf %20.15lf %20.15lf \n", xi, FourierCompute(coefs, N, xi), f(xi));
         double xi1 = 2 * xi / 3 + knots[i + 1] / 3;
-        fprintf(out, "%20.15lf %20.15lf %20.15lf \n", xi1, FourierCompute(coefs, N, xi), f(xi1));
+        fprintf(out, "%20.15lf %20.15lf %20.15lf \n", xi1, FourierCompute(coefs, N, xi1), f(xi1));
         double xi2 = xi / 3 + 2 * knots[i + 1] / 3;
-        fprintf(out, "%20.15lf %20.15lf %20.15lf \n", xi2, FourierCompute(coefs, N, xi), f(xi2));
+        fprintf(out, "%20.15lf %20.15lf %20.15lf \n", xi2, FourierCompute(coefs, N, xi2), f(xi2));
     }
     double xi = knots[N - 1];
     fprintf(out, "%20.15lf %20.15lf %20.15lf \n", xi, FourierCompute(coefs, N, xi), f(xi));
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
     int N; // число узлов
     FILE *fp;
     FILE *sk;
-    double *knots;
+
     double *netmemory;
     double *umemory;
     double *phimemory;
@@ -91,10 +91,10 @@ int main(int argc, char *argv[])
     
     printf("N = %d \n", N);
 
-    netmemory = (double *)malloc(N + 1);
-    umemory = (double *)malloc(N + 1);
-    phimemory = (double *)malloc(N + 1);
-    cNks = (double *)malloc(N + 1);
+    netmemory = (double *)malloc((N + 1) * sizeof(double));
+    umemory = (double *)malloc((N + 1) * sizeof(double));
+    phimemory = (double *)malloc((N + 1) * sizeof(double));
+    cNks = (double *)malloc((N + 1) * sizeof(double));
 
     printf("memory allocated \n");
 
@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    printf(" \n N etmemory: \n"); for(int k = 0; k < N + 1; k ++)  printf("%20.15lf ", netmemory[k]); printf("\n umemory: \n");
+ /*   printf(" \n N etmemory: \n"); for(int k = 0; k < N + 1; k ++)  printf("%20.15lf ", netmemory[k]); printf("\n umemory: \n");
 
     for(int k = 0; k < N + 1; k ++) 
     {
@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
     for(int k = 0; k < N + 1; k ++) 
     {
         printf("%20.15lf ", cNks[k]);
-    }
+    } */
 
     printf("cNks calculated \n");
 
@@ -144,6 +144,7 @@ int main(int argc, char *argv[])
         if ((sk = fopen("printAll.gpi", "w+")) == NULL)
         {
             printf("Не удалось открыть файл");
+            
             fclose(fp);
             return 0;
         }
