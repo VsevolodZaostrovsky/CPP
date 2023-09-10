@@ -122,15 +122,15 @@
 Из краевых условий видно, что функцию $u(x) \in C^{\infty}[0, 1]$ можно разложить в ряд Фурье, 
 взяв синусы в качестве базисных функций:
 \begin{equation*}
-    u(x) = \sum_{m = 1}^{\infty} c_m \sin {\pi m x}
+    u(x) = \sum_{m = 1}^{\infty} c_m \sin {\pi m x}.
 \end{equation*}
 
 Перейдём к рассмотрению конечного числа узлов. Выпишем условия на сетку:
 \begin{align*}
     & u_k := u(x_k), \; h = \frac{1}{N - 0.5}, \; x_k := \frac{-h}{2} + k h \\
-    & u(x_k) = \sum_{m=1}^{N - 1} c_m^n \sin{\pi m x_k}, \\
+    & u(x_k) = \sum_{m=1}^{N - 1} c_m^N \sin{\pi m x_k}, \\
     & \phi_k^m := \sin{\pi m (\frac{-h}{2} + k h)} \\
-    & \phi^m := (\phi_0^m ... \phi_N^m)
+    & \phi^m := (\phi_1^m ... \phi_{N-1}^m).
 \end{align*} 
 Убедимся, что указанная система функций ортогональна относительно скалярного произведения 
 ${(\phi^k, \phi^j) = \sum_{m = 1}^{N - 1}\phi_m^k \phi_m^j h}$:
@@ -138,7 +138,7 @@ ${(\phi^k, \phi^j) = \sum_{m = 1}^{N - 1}\phi_m^k \phi_m^j h}$:
 \begin{align*}
     & (\phi^k, \phi^j) = \sum_{m = 1}^{N - 1} \phi_m^k \phi_m^j h 
     = \sum_{m = 1}^{N - 1} \sin{\pi k (\frac{-h}{2} + m h)} \sin{\pi j (\frac{-h}{2} + m h)} h \\ 
-    & = \frac{1}{2} \sum_{m = 1}^{N - 1} [ \cos{(\pi h (m - \frac{1}{2})(k - j))} - \cos{(\pi h (m - \frac{1}{2})(k + j))} ] h
+    & = \frac{1}{2} \sum_{m = 1}^{N - 1} [ \cos{(\pi h (m - \frac{1}{2})(k - j))} - \cos{(\pi h (m - \frac{1}{2})(k + j))} ] h.
 \end{align*}
 
 Заметим, что при $\alpha \neq 0$ справедливо:
@@ -146,7 +146,7 @@ ${(\phi^k, \phi^j) = \sum_{m = 1}^{N - 1}\phi_m^k \phi_m^j h}$:
     & \sum_{m = 1}^{N - 1} \cos(\alpha m - \frac{\alpha}{2}) = Re\sum_{m = 1}^{N - 1} e^{i (\alpha m - \frac{\alpha}{2})} 
      = Re \frac{e^{\frac{i \alpha}{2}(e^{i \alpha (N - 1)} - 1)}}{e^{i \alpha - 1}} 
      = \frac{Im [-1 + e^{i (N - 1) \alpha}]}{2 \sin(\alpha/2)} \\
-    & = \frac{\sin{(N - 1) \alpha}}{2 \sin(\alpha/2)}
+    & = \frac{\sin{(N - 1) \alpha}}{2 \sin(\alpha/2)}.
 \end{align*}
 
 Отсюда при $k \neq j$:
@@ -159,7 +159,7 @@ ${(\phi^k, \phi^j) = \sum_{m = 1}^{N - 1}\phi_m^k \phi_m^j h}$:
         - \frac{\sin(\pi (k + j) - \pi h (k + j))}{4 \sin(\pi h (k + j)/2)}\right] \\
     & = h \left[ \frac{(-1)^{k-j}\sin(\pi h (k - j))}{4 \sin(\pi h (k - j)/2)}
     - \frac{(-1)^{k+j}\sin(\pi h (k + j))}{4 \sin(\pi h (k + j)/2)}\right] \\
-    & = \frac{h}{2} [(-1)^{k-j}\sin(\pi h (k - j)/2) - (-1)^{k+j}\sin(\pi h (k + j)/2)] = 0
+    & = \frac{h}{2} [(-1)^{k-j}\sin(\pi h (k - j)/2) - (-1)^{k+j}\sin(\pi h (k + j)/2)] = 0.
 \end{align*}
 
 В ином случае, 
@@ -167,7 +167,19 @@ ${(\phi^k, \phi^j) = \sum_{m = 1}^{N - 1}\phi_m^k \phi_m^j h}$:
     & (\phi^k, \phi^k) 
     = \frac{1}{2} \sum_{m = 1}^{N - 1} [ \cos{(\pi h (m - \frac{1}{2})(k - k))} - \cos{(\pi h (m - \frac{1}{2})(k + k))} ] h \\
     & = h \left[ \frac{N - 1}{2} - \frac{\sin{2 (N - 1) \pi h k}}{4 \sin(\pi h k)} \right] 
-    = \frac{2 N - 1}{4} \frac{2}{2 N - 1} = \frac{1}{2}
+    = \frac{2 N - 1}{4} \frac{2}{2 N - 1} = \frac{1}{2}.
 \end{align*}
+
+Теперь, пользуясь ортогональностью, можно выписать формулу $m$-го коэффициента:
+\begin{align*}
+    & u(x) := (u(x_1) ... u(x_{N-1})), \: x := (x_1, ..., x_{N-1})\\
+    & u(x) = \sum_{m=1}^{N - 1} c_m^N \sin{\pi m x} \\
+    & (u(x), \phi^k) = \sum_{m=1}^{N - 1} c_m^N (\phi^m, \phi^k) \\
+    & (u(x), \phi^k) = c_k^N (\phi^k, \phi^k).
+\end{align*}
+Откуда, наконец, следует искомая формула:
+\begin{equation}
+    c_k^N = 2 (u(x), \phi^k).
+\end{equation}
 
 \end{document}
