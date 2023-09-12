@@ -134,6 +134,7 @@ int main(int argc, char *argv[])
     }
 
 
+
     printf("file opened \n");
 
     if (flag)
@@ -154,6 +155,7 @@ int main(int argc, char *argv[])
     }
 
     printf("result written \n");
+
 
     free(netmemory);
     free(umemory);

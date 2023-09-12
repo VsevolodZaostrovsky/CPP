@@ -77,3 +77,12 @@ double FourierCompute(double * coefs, int N, double x)
     return ans;
 }
 
+double FullCompute(double x, int N, double * cNks, double (*u)(double), double * netmemory, double * umemory, double * phimemory) 
+{
+    if(WriteCNkTo(N, cNks, u, netmemory, umemory, phimemory) == 0)
+    {
+        return FourierCompute(cNks, N, x);
+    }
+    printf("Error: Cannot write cNks \n\n\n");
+    return 0;
+}

@@ -1,7 +1,8 @@
 all: 
 	gcc main.c -lm
-.cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
+
+nm:
+	gcc pcalculation.c -lm
 
 clean:
 	rm -rf *.o vector
@@ -9,3 +10,7 @@ clean:
 gr:
 	chmod +x printAll.gpi
 	./printAll.gpi
+
+grnm:
+	chmod +x printDependence.gpi
+	./printDependence.gpi

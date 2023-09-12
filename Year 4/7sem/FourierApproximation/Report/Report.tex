@@ -182,4 +182,45 @@ ${(\phi^k, \phi^j) = \sum_{m = 1}^{N - 1}\phi_m^k \phi_m^j h}$:
     c_k^N = 2 (u(x), \phi^k).
 \end{equation}
 
+\section{Тесты.}
+\subsection{Работоспособность.}
+Рассматривалась функция:
+\begin{lstlisting}[language=c++]
+    double u(double x)
+{
+    return x * (1 - x) * cos(x * x);
+}
+    \end{lstlisting}
+
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.5]{Images/test1.txt.png}
+        \caption{Результаты теста "Работоспособность".}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.5]{Images/test2.txt.png}
+        \caption{Результаты теста "Работоспособность".}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.5]{Images/test3.txt.png}
+        \caption{Результаты теста "Работоспособность".}
+    \end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.5]{Images/test4.txt.png}
+        \caption{Результаты теста "Работоспособность".}
+    \end{figure}
+
+    \subsection{Численное нахождение $p$.}
+
+    Рассматривалась та же функция. Вывод программы: 2.056901336970021.
+
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.5]{Images/normtest1.txt.png}
+        \caption{Результаты теста "Численное нахождение $p$".}
+    \end{figure}
+
 \end{document}

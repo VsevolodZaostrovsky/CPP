@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.11)  10 SEP 2023 14:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.11)  12 SEP 2023 08:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -866,20 +866,57 @@ Overfull \hbox (8.2801pt too wide) detected at line 150
 []
  []
 
-[2] [3] (./Report.aux) ) 
+[2] (c:/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) (c:/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) (c:/texlive/2022/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+) [3]
+<Images/test1.txt.png, id=27, 752.8125pt x 752.8125pt>
+File: Images/test1.txt.png Graphic file (type png)
+<use Images/test1.txt.png>
+Package pdftex.def Info: Images/test1.txt.png  used on input line 197.
+(pdftex.def)             Requested size: 376.40532pt x 376.40532pt.
+<Images/test2.txt.png, id=28, 752.8125pt x 752.8125pt>
+File: Images/test2.txt.png Graphic file (type png)
+<use Images/test2.txt.png>
+Package pdftex.def Info: Images/test2.txt.png  used on input line 202.
+(pdftex.def)             Requested size: 376.40532pt x 376.40532pt.
+<Images/test3.txt.png, id=29, 752.8125pt x 752.8125pt>
+File: Images/test3.txt.png Graphic file (type png)
+<use Images/test3.txt.png>
+Package pdftex.def Info: Images/test3.txt.png  used on input line 207.
+(pdftex.def)             Requested size: 376.40532pt x 376.40532pt.
+<Images/test4.txt.png, id=30, 752.8125pt x 752.8125pt>
+File: Images/test4.txt.png Graphic file (type png)
+<use Images/test4.txt.png>
+Package pdftex.def Info: Images/test4.txt.png  used on input line 212.
+(pdftex.def)             Requested size: 376.40532pt x 376.40532pt.
+
+Overfull \hbox (13.8654pt too wide) in paragraph at lines 218--219
+[]\T2A/cmr/m/n/14.4 Рассматривалась та же функ-ция. Вы-вод про-грам-мы: 2.056901336970021. 
+ []
+
+<Images/normtest1.txt.png, id=31, 752.8125pt x 752.8125pt>
+File: Images/normtest1.txt.png Graphic file (type png)
+<use Images/normtest1.txt.png>
+Package pdftex.def Info: Images/normtest1.txt.png  used on input line 222.
+(pdftex.def)             Requested size: 376.40532pt x 376.40532pt.
+[4 <./Images/test1.txt.png>] [5 <./Images/test2.txt.png>] [6 <./Images/test3.txt.png>] [7 <./Images/test4.txt.png>] [8 <./Images/normtest1.txt.png>] (./Report.aux) ) 
 Here is how much of TeX's memory you used:
- 23010 strings out of 478024
- 476153 string characters out of 5842701
- 779366 words of memory out of 5000000
- 41089 multiletter control sequences out of 15000+600000
- 475607 words of font info for 46 fonts, out of 8000000 for 9000
+ 23495 strings out of 478024
+ 481505 string characters out of 5842701
+ 961195 words of memory out of 5000000
+ 41551 multiletter control sequences out of 15000+600000
+ 482600 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 83i,10n,80p,499b,261s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
-Output written on Report.pdf (3 pages, 136735 bytes).
+ 83i,10n,80p,499b,1178s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
+Output written on Report.pdf (8 pages, 241682 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+ 119 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 38 words of extra memory for PDF output out of 10000 (max. 10000000)
 
