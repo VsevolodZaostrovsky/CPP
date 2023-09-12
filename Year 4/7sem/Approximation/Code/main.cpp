@@ -10,7 +10,7 @@ double module(double x)
 
 double f(double x)
 {
-    return log(x);
+    return 1 / (1 + 25 * x * x);
 }
 
 void PrintTable(double *knots, int N, Pn *P, Ln *L, double (*f)(double))
