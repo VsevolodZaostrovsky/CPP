@@ -19,6 +19,7 @@ typedef enum
   ADDCOMP = 10,
   DELCOMP = 11
 } CommandType;
+
 typedef enum
 {
   NAME = 0,
